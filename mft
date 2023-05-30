@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int tm,bs,nob,ef,n,tif=0,mp[10]={0},i,p=0;
+	printf("Enter the total memory\t");
+	scanf("%d",&tm);
+	printf("Enter the block size\t");
+	scanf("%d",&bs);
+	nob=tm/bs;
+	ef=tm-nob*bs;
+	printf("Enter the number of processes\t");
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		printf("Enter the memory for process%d\t",i+1);
+		scanf("%d",&mp[i]);
+	}
+	printf("Total number of blocks available %d\t",nob);
+	printf("\nProcess\tMemory\tRequired\tinternal frag\n");
+	for(i=0;i<n&&p<nob;i++)
+	{
+		printf("%d\t%d",i+1,mp[i]);
+		if(mp[i]>bs)
+		{
+			printf("\t\tNO\t\t\n");
+			p++;
+		}
+		else
+		{
+			printf("\t\tYes\t%d\n",bs-mp[i]);
+			tif=tif+bs-mp[i];
+			p++;
+		}
+	}
+	if(i<n)
+	{
+		printf("\nMemory is full");
+	}
+	printf("\nTotal internal fragmentation=%d\t",tif);
+	printf("\nTotal external fragmentation=%d\t",ef);
+}
