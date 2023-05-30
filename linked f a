@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int i,f[50],n,st,len,c,k=0,j,a;
+	for(i=0;i<50;i++)
+	f[i]=0;
+	printf("Enter the number of blocks already allocated");
+	scanf("%d",&n);
+	printf("Enter the blocks which are allocated");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a);
+		f[a]=1;
+	}
+	x:printf("Enter the starting block and length of the files");
+	scanf("%d\t%d",&st,&len);
+	k=len;
+	if(f[st]==0)
+	{
+		for(j=st;j<(st+k);j++)
+		{
+			if(f[j]==0)
+			{
+				f[j]=1;
+				printf("\n%d---->%d",j,f[j]);
+			}
+			else
+			{
+				printf("\n%d is already allocated",j);
+				k++;
+			}
+		}
+	}
+	else
+	{
+		printf("\n%d starting block is already allocated",st);
+	}
+		
+		
+	printf("Do you want to continue(1/0)");
+	scanf("%d",&c);
+	if(c==1)
+	goto x;
+	
+}
