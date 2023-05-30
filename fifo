@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+void main()
+{
+	int pages,frames,frame[10],page[10],i,j,hit=0,flag=0,fault=0,count=0,k;
+	printf("Enter the number of pages");
+	scanf("%d",&pages);
+	printf("Enter number of frames");
+	scanf("%d",&frames);
+	for(i=0;i<frames;i++)
+	{
+		frame[i]=-1;
+	}
+	printf("Enter the reference string");
+	for(i=0;i<pages;i++)
+	{
+		scanf("%d",&page[i]);
+	}
+	for(i=0;i<pages;i++)
+	{
+		flag=0;
+		for(j=0;j<frames;j++)
+		{
+			if(frame[j]==page[i])
+			{
+				hit++;
+				flag=1;
+				break;
+			}
+		}
+		if(flag==0)
+		{
+			frame[count%frames]=page[i];
+			count++;
+			fault++;
+		}
+		printf("\n");
+		for(k = 0; k < frames; k++)
+		{
+            printf("%d\t", frame[k]);
+    	}	
+	}
+	printf("\nnumber of faults=%d",fault);
+	printf("\nnumber of hits=%d",hit);
+}
