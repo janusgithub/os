@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+int main() {
+    int frames, pages, i, j, k, l, m, n, count = 0, fault = 0, hit = 0, flag = 0, min = 0;
+    printf("Enter number of frames: ");
+    scanf("%d", &frames);
+    int frame[frames];
+    printf("Enter number of pages: ");
+    scanf("%d", &pages);
+    int page[pages];
+    int counter[frames];
+    for(i = 0; i < frames; i++) {
+        frame[i] = -1;
+        counter[i] = 0;
+    }
+    printf("Enter page reference string: ");
+    for(i = 0; i < pages; i++) {
+        scanf("%d", &page[i]);
+    }
+    for(i = 0; i < pages; i++) {
+        flag = 0;
+        for(j = 0; j < frames; j++) {
+            if(frame[j] == page[i]) {
+                hit++;
+                counter[j] = 0;
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0) {
+            min = counter[0];
+            for(k = 1; k < frames; k++) {
+                if(counter[k] < min) {
+                    min = counter[k];
+                    l = k;
+                }
+            }
+            frame[l] = page[i];
+            counter[l] = 0;
+            fault++;
+            count++;
+        }
+        for(m = 0; m < frames; m++) {
+            if(frame[m] != -1) {
+                counter[m]++;
+            }
+        }
+        printf("\n");
+        for(n = 0; n < frames; n++) {
+            printf("%d\t", frame[n]);
+        }
+    }
+    float fault_percentage = (float)fault / pages * 100;
+    float hit_percentage = (float)hit / pages * 100;
+    printf("\nPage Faults: %d\n", fault);
+    printf("Page Fault Percentage: %.2f%%\n", fault_percentage);
+    printf("Page Hits: %d\n", hit);
+    printf("Page Hit Percentage: %.2f%%\n", hit_percentage);
+    return 0;
+}
